@@ -1,0 +1,30 @@
+form {
+  width: 100%;
+  /*  */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+form > textarea {
+  padding: 5px 10px;
+  width: 100%;
+  min-height: 70px;
+  border: 1px solid rgb(223, 223, 223);
+  border-radius: 8px;
+}
+form > button {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--primary-color);
+  background: transparent;
+  /* border: none; */
+  border-radius: 8px;
+  color: var(--primary-color);
+  cursor: pointer;
+}
+form > button:active {
+  transition: all ease 200ms;
+  transform: scale(0.89);
+}
