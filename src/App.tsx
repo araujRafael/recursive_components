@@ -3,16 +3,7 @@ import Comments, { DataComment } from "./components/Comments";
 import CommentTextArea from "./components/CommentTextArea";
 
 
-// DATA *********************************************************
-const JHON_DATA: DataComment = {
-  id: Math.random().toString(36).substring(2, 9),
-  body: "",
-  parentId: null,
-  avatar: "",
-  userId: "1",
-  username: "Jhon",
-  createdAt: new Date().toISOString()
-}
+
 
 function App() {
   // API *********************************************************
@@ -20,10 +11,27 @@ function App() {
   // State ************************************************************
   const [data, setData] = useState<DataComment[]>([])
   // Config Data *******************************************************
+  /**
+   * imagine that the userId come from db
+   */
   const currentUserId = "1"
-  const rootComments = data.filter?.(x => !x.parentId).sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-  // get replies and sort
-  const getReplies = (commentId: string) => data.filter?.(x => x.parentId === commentId).sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
+
+  /**
+   * Bring me comments that haven't parentId and sort `ASC`
+  */
+  const rootComments = data
+    .filter(x => !x.parentId)
+    .sort((a, b) =>
+      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+  /**
+   * Get replies and sort => `ASC`
+   * @param commentId id of the documnet
+   * @returns DataComments[]
+   */
+  const getReplies = (commentId: string) => data
+    .filter(x => x.parentId === commentId)
+    .sort((a, b) =>
+      new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
 
   // Fetch Data *******************************************************
   useEffect(() => {
@@ -37,7 +45,21 @@ function App() {
     setData(json)
   }
   const addComment = async (text: string, parentId?: string) => {
-    const body = JSON.stringify({ ...JHON_DATA, body: text, parentId: parentId ? parentId : null })
+    // USER *********************************************************
+    const JHON_DATA: DataComment = {
+      id: Math.random().toString(36).substring(2, 9),
+      body: "",
+      parentId: null,
+      avatar: "",
+      userId: "1",
+      username: "Jhon",
+      createdAt: new Date().toISOString()
+    }
+    // ...
+    const body = JSON.stringify({
+      ...JHON_DATA,
+      body: text, parentId: parentId ? parentId : null
+    })
     // 
     try {
       const resp = await fetch(URL_API, {
@@ -52,6 +74,7 @@ function App() {
       console.log(err);
     }
   }
+  // "on<Anything>" is actions from Comment::Component
   const onDelete = async (id: string) => {
     try {
       const resp = await fetch(URL_API + `/${id}`, {

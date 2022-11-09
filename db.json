@@ -5,7 +5,7 @@
       "body": "First comment",
       "avatar": "https://github.com/araujrafael.png",
       "username": "Rafael",
-      "userId": "1",
+      "userId": "2",
       "parentId": null,
       "createdAt": "2022-11-08T23:07:05.096Z"
     },
@@ -14,18 +14,9 @@
       "body": "Third comment",
       "avatar": null,
       "username": "Jhon",
-      "userId": "2",
+      "userId": "1",
       "parentId": "1",
       "createdAt": "2022-11-08T23:07:05.096Z"
-    },
-    {
-      "id": "vvg5470",
-      "body": "nice",
-      "parentId": "1",
-      "avatar": "",
-      "userId": "1",
-      "username": "Jhon",
-      "createdAt": "2022-11-09T03:25:47.068Z"
     }
   ]
 }

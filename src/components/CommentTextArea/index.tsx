@@ -25,7 +25,8 @@ const CommentTextArea: React.FC<CommentTextAreaProps> = ({
   // render
   return (
     <form onSubmit={onSubmit}>
-      <textarea placeholder={`Write comment.`} value={text} onChange={e => setText(e.target.value)} />
+      <textarea placeholder={`Write comment.`}
+        value={text} onChange={e => setText(e.target.value)} />
       <button type='submit' disabled={isDisableBtn} >
         {submitLabel}
       </button>
