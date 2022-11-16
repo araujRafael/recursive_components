@@ -6,18 +6,19 @@ import CommentTextArea from "./components/CommentTextArea";
 
 
 function App() {
-  // API *********************************************************
-  const MY_GITHUB = "araujrafael"
-  const REPO_CODE = "recursive-comments-db"
-  const ENDPOINT = "comments"
-  const URL_API = `https://my-json-server.typicode.com/${MY_GITHUB}/${REPO_CODE}/${ENDPOINT}`
-  // State ************************************************************
-  const [data, setData] = useState<DataComment[]>([])
   // Config Data *******************************************************
   /**
    * imagine that the userId come from db
    */
+  Math.floor(Math.random() * 3)
   const currentUserId = "1"
+  // API *********************************************************
+  const MY_GITHUB = "araujrafael"
+  const REPO_CODE = "recursive-comments-db"
+  const ENDPOINT = "comments"
+  const URL_API = `https://6375676208104a9c5f98f19f.mockapi.io/api/v1/${ENDPOINT}`
+  // State ************************************************************
+  const [data, setData] = useState<DataComment[]>([])
 
   /**
    * Bring me comments that haven't parentId and sort `ASC`
@@ -83,9 +84,7 @@ function App() {
       const resp = await fetch(URL_API + `/${id}`, {
         method: "DELETE"
       })
-      if (resp.ok) {
-        setData(st => st.filter(x => x.id !== id))
-      }
+      getComments()
     } catch (err) {
       console.log(err);
     }
@@ -93,14 +92,18 @@ function App() {
   const onEdit = async (obj: object, id: string,) => {
     const newData = JSON.stringify(obj)
     try {
-      await fetch(URL_API + `/${id}`, {
-        method: "PATCH",
+      const resp = await fetch(URL_API + `/${id}`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json"
         },
         body: newData
       })
-      getComments()
+      if (resp.ok) {
+        getComments()
+      } else {
+        console.log(resp);
+      }
     } catch (err) {
       console.log(err);
     }
