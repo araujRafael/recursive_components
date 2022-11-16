@@ -7,7 +7,11 @@ import CommentTextArea from "./components/CommentTextArea";
 
 function App() {
   // API *********************************************************
-  const URL_API = "http://localhost:4000/comments"
+  const MY_GITHUB = "araujrafael"
+  const REPO_CODE = "https://github.com/araujRafael/recursive-comments-db"
+  const ENDPOINT = "comments"
+  const URL_API =
+    `https://my-json-server.typicode.com/${MY_GITHUB}/${REPO_CODE}/${ENDPOINT}`
   // State ************************************************************
   const [data, setData] = useState<DataComment[]>([])
   // Config Data *******************************************************
