@@ -2,9 +2,6 @@ import { useEffect, useState } from "react";
 import Comments, { DataComment } from "./components/Comments";
 import CommentTextArea from "./components/CommentTextArea";
 
-
-
-
 function App() {
   // Config Data *******************************************************
   /**
@@ -13,10 +10,9 @@ function App() {
   Math.floor(Math.random() * 3)
   const currentUserId = "1"
   // API *********************************************************
-  const MY_GITHUB = "araujrafael"
-  const REPO_CODE = "recursive-comments-db"
+  const MOCK_API = process.env.REACT_APP_MOCK_API
   const ENDPOINT = "comments"
-  const URL_API = `https://6375676208104a9c5f98f19f.mockapi.io/api/v1/${ENDPOINT}`
+  const URL_API = `${MOCK_API}${ENDPOINT}`
   // State ************************************************************
   const [data, setData] = useState<DataComment[]>([])
 
@@ -46,7 +42,7 @@ function App() {
   const getComments = async () => {
     const resp = await fetch(URL_API)
     const json = await resp.json()
-    setData(json)
+    setData(await json)
   }
   const addComment = async (text: string, parentId?: string) => {
     // USER *********************************************************
